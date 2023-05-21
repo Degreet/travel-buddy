@@ -1,73 +1,22 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# TravelBuddy
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+TravelBuddy - это API, предназначенное для облегчения путешествий и помощи туристам во время их поездок. API будет предоставлять различную информацию о путешествиях, включая места, достопримечательности, рестораны, отели и другие полезные сведения о различных городах и странах. Путешественники смогут получать доступ к API, чтобы создавать приложения или сервисы, которые помогут им планировать свои поездки и находить интересные места для посещения.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+# Функциональность:
 
-## Description
+- Поиск мест и достопримечательностей: Позволяет пользователям искать места и достопримечательности по городам, странам или ключевым словам. API будет предоставлять информацию о местоположении, описании, рейтингах, отзывах и фотографиях.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- Рекомендации и персонализация: API будет предлагать рекомендации пользователю на основе его предпочтений, истории путешествий и дополнительных параметров, таких как бюджет и длительность пребывания.
 
-## Installation
+- Информация о ресторанах и отелях: API будет предоставлять информацию о различных ресторанах и отелях в конкретном месте, включая цены, отзывы, доступность и другую полезную информацию.
 
-```bash
-$ npm install
-```
+- Планирование маршрута: Пользователи смогут использовать API для создания маршрута путешествия, добавляя различные достопримечательности и места в свой список. API будет предоставлять информацию о времени, расстоянии и оптимальных маршрутах между местами.
 
-## Running the app
+- Интеграция с картами: API будет предоставлять возможность интеграции с картами, чтобы пользователи могли просматривать местоположения на карте и получать навигационные указания.
 
-```bash
-# development
-$ npm run start
+# Преимущества:
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+- Помогает путешественникам с планированием и поиском интересных мест.
+- Улучшает пользовательский опыт в путешествиях.
+- Повышает эффективность путешествий и экономит время.
+- Предоставляет возможность разработчикам создавать разнообразные путешественнические приложения и сервисы.
