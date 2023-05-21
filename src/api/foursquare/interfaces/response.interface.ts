@@ -1,4 +1,4 @@
-export interface FSQResponse {
+export interface SearchResponse {
   results: Place[];
   context: Context;
 }

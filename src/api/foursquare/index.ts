@@ -1,4 +1,4 @@
-import { FSQResponse, Place } from './interfaces/response.interface';
+import { SearchResponse, Place } from './interfaces/response.interface';
 import axios from 'axios';
 
 export class FoursquareAPI {
@@ -11,7 +11,7 @@ export class FoursquareAPI {
   }
 
   private async makeRequest(params: Record<string, string>) {
-    return await axios.get<FSQResponse>(this.API_URL, {
+    return await axios.get<SearchResponse>(this.API_URL, {
       headers: {
         Authorization: this.API_KEY,
       },
