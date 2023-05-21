@@ -1,4 +1,4 @@
-import { FSQResponse, Result } from './interfaces/response.interface';
+import { FSQResponse, Place } from './interfaces/response.interface';
 import axios from 'axios';
 
 export class FoursquareAPI {
@@ -22,7 +22,7 @@ export class FoursquareAPI {
     });
   }
 
-  async search(near: string, query?: string): Promise<Result[]> {
+  async search(near: string, query?: string): Promise<Place[]> {
     const { data } = await this.makeRequest({ near, query });
     return data?.results;
   }

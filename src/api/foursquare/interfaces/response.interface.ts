@@ -1,9 +1,9 @@
 export interface FSQResponse {
-  results: Result[];
+  results: Place[];
   context: Context;
 }
 
-export interface Result {
+export interface Place {
   fsq_id: string;
   categories: Category[];
   chains: any[];

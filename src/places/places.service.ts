@@ -5,7 +5,8 @@ import { FoursquareAPI } from '../api/foursquare';
 export class PlacesService {
   constructor(private foursquareApi: FoursquareAPI) {}
 
-  async search() {
-    return await this.foursquareApi.search('Киев', 'ресторан');
+  async search(near: string, query?: string) {
+    const places = await this.foursquareApi.search(near, query);
+    return places;
   }
 }

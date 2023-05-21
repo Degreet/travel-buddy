@@ -1,12 +1,12 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { PlacesService } from './places.service';
 
 @Controller('places')
 export class PlacesController {
   constructor(private readonly placesService: PlacesService) {}
 
-  @Get()
-  async some() {
-    return await this.placesService.search();
+  @Get(':near')
+  async some(@Param() near: string, @Query('q') query?: string) {
+    return await this.placesService.search(near, query);
   }
 }
