@@ -32,7 +32,7 @@ export class PlacesService {
       };
 
       for (const photo of result.photos) {
-        const { data } = await this.client.placePhoto({
+        const { request } = await this.client.placePhoto({
           params: {
             ...this.getKey(),
             photoreference: photo.photo_reference,
@@ -42,10 +42,7 @@ export class PlacesService {
           responseType: 'arraybuffer',
         });
 
-        place.photos.push(
-          'data:image/png;base64,' +
-            Buffer.from(data, 'binary').toString('base64'),
-        );
+        place.photos.push(request.res.responseUrl);
       }
 
       places.push(place);
