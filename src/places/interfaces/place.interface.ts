@@ -1,10 +1,6 @@
-export interface IPlace {
+export interface Place {
   name: string;
   address: string;
-  geocode: IGeocode;
-}
-
-export interface IGeocode {
-  lg: number;
-  lt: number;
+  rating?: number;
+  photos: string[];
 }

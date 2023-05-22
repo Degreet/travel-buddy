@@ -1,11 +1,10 @@
 import { Module } from '@nestjs/common';
 import { PlacesService } from './places.service';
 import { PlacesController } from './places.controller';
-import { FoursquareAPI } from '../api/foursquare';
-import { OpencageAPI } from '../api/opencage';
+import { Client } from '@googlemaps/google-maps-services-js';
 
 @Module({
   controllers: [PlacesController],
-  providers: [PlacesService, FoursquareAPI, OpencageAPI],
+  providers: [PlacesService, Client],
 })
 export class PlacesModule {}
