@@ -1,53 +1,37 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { Client } from '@googlemaps/google-maps-services-js';
+import { Inject, Injectable } from '@nestjs/common';
 import { Place } from './interfaces/place.interface';
+import { PlacesApi } from './api/places.api';
+import { PlaceData } from '@googlemaps/google-maps-services-js/src/common';
 
 @Injectable()
 export class PlacesService {
-  constructor(private client: Client) {}
+  constructor(@Inject(PlacesApi.name) private readonly placesApi: PlacesApi) {}
 
-  private getKey(): { key: string } {
-    return { key: process.env.GOOGLE_PLACES_API_KEY };
+  private async buildPlaceObj(details: Partial<PlaceData>) {
+    const place: Place = {
+      id: details.place_id,
+      name: details.name,
+      address: details.formatted_address,
+      rating: details.rating,
+      reviews: details.reviews,
+      photos: await Promise.all(
+        (details.photos || []).map((photo) => this.placesApi.photoLink(photo)),
+      ),
+    };
+
+    return place;
   }
 
-  async search(query: string) {
-    const { data } = await this.client.textSearch({
-      params: {
-        query,
-        ...this.getKey(),
-      },
-    });
+  async getPlaceById(id: string): Promise<Place> {
+    const details = await this.placesApi.details(id);
+    return await this.buildPlaceObj(details || {});
+  }
 
-    if (!data || data.error_message)
-      throw new HttpException(data.error_message, HttpStatus.NOT_ACCEPTABLE);
-
-    const places: Place[] = [];
-
-    for (const result of data.results) {
-      const place: Place = {
-        name: result.name,
-        address: result.formatted_address,
-        rating: result.rating,
-        photos: [],
-      };
-
-      for (const photo of result.photos) {
-        const { request } = await this.client.placePhoto({
-          params: {
-            ...this.getKey(),
-            photoreference: photo.photo_reference,
-            maxwidth: photo.width,
-            maxheight: photo.height,
-          },
-          responseType: 'arraybuffer',
-        });
-
-        place.photos.push(request.res.responseUrl);
-      }
-
-      places.push(place);
-    }
-
-    return places;
+  async search(query: string): Promise<Place[]> {
+    return await Promise.all(
+      (
+        await this.placesApi.search(query)
+      ).map((place) => this.buildPlaceObj(place)),
+    );
   }
 }
