@@ -30,7 +30,7 @@ export class PlacesApi {
         ...params,
       },
       responseType,
-    });
+    }).catch(console.error);
   }
 
   async search(query: string): Promise<Place[]> {

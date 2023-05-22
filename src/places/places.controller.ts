@@ -9,9 +9,7 @@ export class PlacesController {
   @Get()
   async search(@Query() searchQueryDto: SearchQueryDto) {
     const { country, city, query } = searchQueryDto;
-    return await this.placesService.search(
-      [country, city, query || 'interesting'].join(),
-    );
+    return await this.placesService.search(country, city, query);
   }
 
   @Get(':id')

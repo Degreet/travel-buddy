@@ -27,10 +27,16 @@ export class PlacesService {
     return await this.buildPlaceObj(details || {});
   }
 
-  async search(query: string): Promise<Place[]> {
+  async search(
+    country?: string,
+    city?: string,
+    query?: string,
+  ): Promise<Place[]> {
     return await Promise.all(
       (
-        await this.placesApi.search(query)
+        (await this.placesApi.search(
+          [country, city, query || 'interesting'].join(),
+        )) || []
       ).map((place) => this.buildPlaceObj(place)),
     );
   }
