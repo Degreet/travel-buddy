@@ -37,6 +37,6 @@ describe('UsersService', () => {
     const dto = new CreateUserDto();
     dto.email = 'example@gmail.com';
     dto.password = randomStringGenerator();
-    await service.createUser(dto);
+    expect(await service.createUser(dto)).toBeDefined();
   });
 });
