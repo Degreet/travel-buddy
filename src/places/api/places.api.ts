@@ -1,18 +1,10 @@
 import {
   Client,
   Place,
-  PlaceDetailsRequest,
-  PlaceDetailsResponse,
   PlacePhoto,
-  PlacePhotoRequest,
-  PlacePhotoResponse,
-  PlacesNearbyRequest,
-  PlacesNearbyResponse,
-  TextSearchRequest,
-  TextSearchResponse,
+  PlaceType1,
 } from '@googlemaps/google-maps-services-js';
 
-import { Params } from '../types/params.type';
 import { Geocode } from '../interfaces/geocode.interface';
 
 export class PlacesApi {
@@ -22,57 +14,41 @@ export class PlacesApi {
     this.GOOGLE_PLACES_API_KEY = process.env.GOOGLE_PLACES_API_KEY;
   }
 
-  async makeRequest<T, R>(
-    method: string,
-    params: T,
-    responseType?: string,
-  ): Promise<R> {
-    return this.client[method]({
-      params: {
-        key: this.GOOGLE_PLACES_API_KEY,
-        ...params,
-      },
-      responseType,
-    }).catch(console.error);
+  get apiKey() {
+    return { key: this.GOOGLE_PLACES_API_KEY };
   }
 
   async search(query: string): Promise<Place[]> {
-    const response = await this.makeRequest<
-      Params<TextSearchRequest>,
-      TextSearchResponse
-    >('textSearch', { query });
+    const response = await this.client.textSearch({
+      params: { ...this.apiKey, query },
+    });
     return response?.data?.results;
   }
 
-  async searchNear(near: Geocode, type?: string): Promise<Place[]> {
-    const response = await this.makeRequest<
-      Params<PlacesNearbyRequest>,
-      PlacesNearbyResponse
-    >('textSearch', { location: near, type });
+  async searchNear(near: Geocode, type?: PlaceType1): Promise<Place[]> {
+    const response = await this.client.placesNearby({
+      params: { ...this.apiKey, location: near, type },
+    });
     return response?.data?.results;
   }
 
   async details(place_id: string): Promise<Place> {
-    const response = await this.makeRequest<
-      Params<PlaceDetailsRequest>,
-      PlaceDetailsResponse
-    >('placeDetails', { place_id });
+    const response = await this.client.placeDetails({
+      params: { ...this.apiKey, place_id },
+    });
     return response?.data?.result;
   }
 
   async photoLink(photo: PlacePhoto): Promise<string> {
-    const response = await this.makeRequest<
-      Params<PlacePhotoRequest>,
-      PlacePhotoResponse
-    >(
-      'placePhoto',
-      {
+    const response = await this.client.placePhoto({
+      params: {
+        ...this.apiKey,
         photoreference: photo.photo_reference,
         maxwidth: photo.width,
         maxheight: photo.height,
       },
-      'arraybuffer',
-    );
+      responseType: 'arraybuffer',
+    });
     return response?.request?.res?.responseUrl;
   }
 }
