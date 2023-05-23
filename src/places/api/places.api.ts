@@ -27,7 +27,7 @@ export class PlacesApi {
 
   async searchNear(near: Geocode, type?: PlaceType1): Promise<Place[]> {
     const response = await this.client.placesNearby({
-      params: { ...this.apiKey, location: near, type },
+      params: { ...this.apiKey, radius: 50000, location: near, type },
     });
     return response?.data?.results;
   }

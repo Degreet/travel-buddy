@@ -7,9 +7,8 @@ import {
 } from 'class-validator';
 
 import { City, Country } from 'country-state-city';
-import { PLACE_TYPES } from '../constants/place-types.constant';
-import { PlaceType } from '../types/place.type';
 import { Geocode } from '../interfaces/geocode.interface';
+import { PlaceType1 } from '@googlemaps/google-maps-services-js';
 
 export class SearchQueryDto {
   @IsOptional()
@@ -24,8 +23,8 @@ export class SearchQueryDto {
 
   @ValidateIf((v) => !!v.location)
   @IsString()
-  @IsIn(PLACE_TYPES)
-  type?: PlaceType;
+  @IsIn(Object.values(PlaceType1))
+  type?: PlaceType1;
 
   @ValidateIf((v) => !!v.type)
   @IsLatLong()

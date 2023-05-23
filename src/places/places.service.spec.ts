@@ -1,7 +1,7 @@
 import { PlacesController } from './places.controller';
 import { PlacesService } from './places.service';
 import { PlacesApi } from './api/places.api';
-import { Client } from '@googlemaps/google-maps-services-js';
+import { Client, PlaceType1 } from '@googlemaps/google-maps-services-js';
 import { Test } from '@nestjs/testing';
 import { ConfigModule } from '@nestjs/config';
 import { Place } from './interfaces/place.interface';
@@ -12,7 +12,6 @@ describe('PlacesController', () => {
   let places: Place[];
 
   beforeEach(async () => {
-    placesService = new PlacesService(new PlacesApi(new Client()));
     const moduleRef = await Test.createTestingModule({
       controllers: [PlacesController],
       imports: [ConfigModule.forRoot()],
@@ -44,7 +43,7 @@ describe('PlacesController', () => {
   describe('search near', () => {
     it('Search cafe near found place', async () => {
       const dto = new SearchQueryDto();
-      dto.type = 'cafe';
+      dto.type = PlaceType1.cafe;
       dto.location = places[0].geocode;
 
       const nearPlaces = await placesService.search(dto);
