@@ -6,11 +6,14 @@ import {
   PlacePhoto,
   PlacePhotoRequest,
   PlacePhotoResponse,
+  PlacesNearbyRequest,
+  PlacesNearbyResponse,
   TextSearchRequest,
   TextSearchResponse,
 } from '@googlemaps/google-maps-services-js';
 
 import { Params } from '../types/params.type';
+import { Geocode } from '../interfaces/geocode.interface';
 
 export class PlacesApi {
   private readonly GOOGLE_PLACES_API_KEY: string;
@@ -38,6 +41,14 @@ export class PlacesApi {
       Params<TextSearchRequest>,
       TextSearchResponse
     >('textSearch', { query });
+    return response?.data?.results;
+  }
+
+  async searchNear(near: Geocode, type?: string): Promise<Place[]> {
+    const response = await this.makeRequest<
+      Params<PlacesNearbyRequest>,
+      PlacesNearbyResponse
+    >('textSearch', { location: near, type });
     return response?.data?.results;
   }
 

@@ -5,6 +5,7 @@ import { Client } from '@googlemaps/google-maps-services-js';
 import { Test } from '@nestjs/testing';
 import { ConfigModule } from '@nestjs/config';
 import { Place } from './interfaces/place.interface';
+import { SearchQueryDto } from './dto/search.query.dto';
 
 describe('PlacesController', () => {
   let placesService: PlacesService;
@@ -27,13 +28,28 @@ describe('PlacesController', () => {
     }).compile();
 
     placesService = moduleRef.get<PlacesService>(PlacesService);
-    places = await placesService.search('ukraine');
   });
 
   describe('search', () => {
     it('Find Ukraine interesting places', async () => {
+      const dto = new SearchQueryDto();
+      dto.country = 'ukraine';
+      places = await placesService.search(dto);
+
       expect(places).toBeDefined();
       expect(places.length).toBeGreaterThanOrEqual(5);
+    });
+  });
+
+  describe('search near', () => {
+    it('Search cafe near found place', async () => {
+      const dto = new SearchQueryDto();
+      dto.type = 'cafe';
+      dto.location = places[0].geocode;
+
+      const nearPlaces = await placesService.search(dto);
+      expect(nearPlaces).toBeDefined();
+      expect(nearPlaces.length).toBeGreaterThanOrEqual(1);
     });
   });
 });
