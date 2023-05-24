@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { TripsService } from './trips.service';
 import { MakeRecordDto } from './dto/make-record.dto';
 import { AuthGuard } from '../auth/guards/auth.guard';
@@ -15,5 +15,10 @@ export class TripsController {
     @Req() request: Request,
   ) {
     await this.tripsService.makeRecord(makeRecordDto, request['user']);
+  }
+
+  @Get('my')
+  async myTrips(@Req() request: Request) {
+    return await this.tripsService.myTrips(request['user']);
   }
 }

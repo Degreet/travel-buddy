@@ -1,4 +1,11 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Trip } from '../../trips/entities/trip.entity';
 
 @Entity()
 export class User extends BaseEntity {
@@ -13,4 +20,7 @@ export class User extends BaseEntity {
 
   @Column({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
   dateReg: Date;
+
+  @OneToMany(() => Trip, (trip) => trip.traveler)
+  trips: Trip[];
 }

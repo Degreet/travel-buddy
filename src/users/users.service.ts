@@ -10,8 +10,11 @@ export class UsersService {
     @InjectRepository(User) private usersRepository: Repository<User>,
   ) {}
 
-  async findByEmail(email: string) {
-    return await this.usersRepository.findOneBy({ email });
+  async findByEmail(email: string, loadTrips?: boolean) {
+    return await this.usersRepository.findOne({
+      where: { email },
+      relations: { trips: loadTrips },
+    });
   }
 
   async createUser(createUserDto: CreateUserDto) {
